@@ -14,16 +14,25 @@ namespace MaskHelper.WinForms
                 Cursor = value ? Cursors.WaitCursor : Cursors.Arrow;
                 progressSpinner.Visible = value;
                 selectButton.Enabled = !value;
+                selectFolderButton.Enabled = !value;
                 generateButton.Enabled = !value;
                 loading = false;
             }
         }
 
         private string? filePath = null;
+        private string? folderPath = null;
 
         public Configure()
         {
             InitializeComponent();
+        }
+
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+
+            Icon = Properties.Resources.calviri;
         }
 
         private void selectButton_Click(object sender, EventArgs e)
@@ -36,8 +45,23 @@ namespace MaskHelper.WinForms
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 filePath = dialog.FileName;
-
                 filePathDisplay.Text = filePath;
+
+                var fileInfo = new FileInfo(dialog.FileName);
+                folderPath = fileInfo.DirectoryName;
+                if (folderPath != null)
+                    folderPathDisplay.Text = folderPath;
+            }
+        }
+
+        private void selectFolderButton_Click(object sender, EventArgs e)
+        {
+            using var dialog = new FolderBrowserDialog();
+
+            if (dialog.ShowDialog() == DialogResult.OK && !string.IsNullOrWhiteSpace(dialog.SelectedPath))
+            {
+                folderPath = dialog.SelectedPath;
+                folderPathDisplay.Text = folderPath;
             }
         }
 
@@ -47,9 +71,9 @@ namespace MaskHelper.WinForms
             {
                 Loading = true;
 
-                if (filePath == null)
+                if (filePath == null || folderPath == null)
                 {
-                    MessageBox.Show("Select a file to continue.");
+                    MessageBox.Show("Select a file and output folder to continue.");
                 }
                 else
                 {
@@ -57,7 +81,7 @@ namespace MaskHelper.WinForms
                     {
                         var fileGenerator = new FileGenerator();
 
-                        await fileGenerator.GenerateFiles(filePath, Convert.ToInt32(lastMaskIdInput.Value));
+                        await fileGenerator.GenerateFiles(filePath, folderPath, Convert.ToInt32(lastMaskIdInput.Value));
                     }
                     catch (Exception ex)
                     {

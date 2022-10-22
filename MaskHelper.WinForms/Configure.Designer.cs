@@ -35,6 +35,9 @@
             this.lastMaskIdInput = new System.Windows.Forms.NumericUpDown();
             this.generateButton = new System.Windows.Forms.Button();
             this.progressSpinner = new System.Windows.Forms.PictureBox();
+            this.folderPathDisplay = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.selectFolderButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.lastMaskIdInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.progressSpinner)).BeginInit();
             this.SuspendLayout();
@@ -68,12 +71,13 @@
             this.filePathDisplay.Size = new System.Drawing.Size(112, 25);
             this.filePathDisplay.TabIndex = 3;
             this.filePathDisplay.Text = "Select a file...";
+            this.filePathDisplay.Click += new System.EventHandler(this.selectButton_Click);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(25, 125);
+            this.label3.Location = new System.Drawing.Point(25, 210);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(120, 28);
             this.label3.TabIndex = 4;
@@ -81,7 +85,7 @@
             // 
             // lastMaskIdInput
             // 
-            this.lastMaskIdInput.Location = new System.Drawing.Point(25, 165);
+            this.lastMaskIdInput.Location = new System.Drawing.Point(25, 250);
             this.lastMaskIdInput.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -98,7 +102,7 @@
             // 
             // generateButton
             // 
-            this.generateButton.Location = new System.Drawing.Point(25, 224);
+            this.generateButton.Location = new System.Drawing.Point(25, 309);
             this.generateButton.Name = "generateButton";
             this.generateButton.Size = new System.Drawing.Size(112, 34);
             this.generateButton.TabIndex = 6;
@@ -108,7 +112,8 @@
             // 
             // progressSpinner
             // 
-            this.progressSpinner.Location = new System.Drawing.Point(165, 218);
+            this.progressSpinner.Image = global::MaskHelper.WinForms.Properties.Resources.spinner;
+            this.progressSpinner.Location = new System.Drawing.Point(165, 303);
             this.progressSpinner.Name = "progressSpinner";
             this.progressSpinner.Size = new System.Drawing.Size(40, 40);
             this.progressSpinner.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -116,11 +121,45 @@
             this.progressSpinner.TabStop = false;
             this.progressSpinner.Visible = false;
             // 
+            // folderPathDisplay
+            // 
+            this.folderPathDisplay.AutoSize = true;
+            this.folderPathDisplay.Location = new System.Drawing.Point(153, 162);
+            this.folderPathDisplay.Name = "folderPathDisplay";
+            this.folderPathDisplay.Size = new System.Drawing.Size(136, 25);
+            this.folderPathDisplay.TabIndex = 10;
+            this.folderPathDisplay.Text = "Select a folder...";
+            this.folderPathDisplay.Click += new System.EventHandler(this.selectFolderButton_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label4.Location = new System.Drawing.Point(25, 117);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(136, 28);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "Output Folder";
+            // 
+            // selectFolderButton
+            // 
+            this.selectFolderButton.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.selectFolderButton.Location = new System.Drawing.Point(25, 157);
+            this.selectFolderButton.Name = "selectFolderButton";
+            this.selectFolderButton.Size = new System.Drawing.Size(112, 35);
+            this.selectFolderButton.TabIndex = 8;
+            this.selectFolderButton.Text = "Select";
+            this.selectFolderButton.UseVisualStyleBackColor = true;
+            this.selectFolderButton.Click += new System.EventHandler(this.selectFolderButton_Click);
+            // 
             // Configure
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(528, 283);
+            this.ClientSize = new System.Drawing.Size(671, 370);
+            this.Controls.Add(this.folderPathDisplay);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.selectFolderButton);
             this.Controls.Add(this.progressSpinner);
             this.Controls.Add(this.generateButton);
             this.Controls.Add(this.lastMaskIdInput);
@@ -146,5 +185,8 @@
         private NumericUpDown lastMaskIdInput;
         private Button generateButton;
         private PictureBox progressSpinner;
+        private Label folderPathDisplay;
+        private Label label4;
+        private Button selectFolderButton;
     }
 }
